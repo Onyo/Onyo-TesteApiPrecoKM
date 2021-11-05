@@ -16,5 +16,8 @@ pipeline {
         always{
             junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
         }
+        fixed{
+            emaillesxt attachLog: true, body: 'See the attached log below', subject: 'Build is fine!!!', to: 'leafarccomputacao@gmail.com'
+        }
     }
 }
