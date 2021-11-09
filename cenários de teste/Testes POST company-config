@@ -1,0 +1,270 @@
+Company config - Testes
+
+Cenário 01 - Criar company com todos os parâmetros corretos
+
+Resultado esperado
+status 201 Created
+body: 
+{
+    "company_id": 2147483646,
+    "full_service": false
+}
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 02 - Criar company com company_id existente
+
+Resultado esperado
+status 209 Conflict
+body: 
+
+{
+    "detail": "custom company config with this company id already exists."
+}
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 03 - Criar company com apenas company_id
+
+Resultado esperado
+status 400 Bad Request
+
+{
+    "full_service": [
+        "This field is required."
+    ]
+}
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 04 - Criar company com campany_id: null
+
+Resultado esperado
+status 400 Created
+body: 
+{
+    "company_id": [
+        "This field may not be null."
+    ]
+}
+-----------------------------------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 05 - Criar company como texto sem aspas em company_id
+company_id: 
+
+Resultado esperado
+status 201 Created
+body: 
+{
+    "company_id": 487,
+    "full_service": false
+}
+
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 06 - Criar company com texto com aspas em company_id
+company_id: 488
+
+Resultado esperado
+status 201 Created
+body: 
+{
+    "company_id": 488,
+    "full_service": false
+}
+
+-----------------------------------------------------------------------------------------------------
+
+ERRO AQUI
+Cenário 07 - Criar company com  valor zero (0)
+
+Resultado esperado (Não deve ser possível criar uma company id = zero)
+status 400 Bad Request
+body: 
+{
+    "company_id": [
+        "campany id não deve ser igual a zero"
+    ]
+}
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 8 - Criar company com company_id vazio 
+
+Resultado esperado
+status 400 Bad Request
+body: 
+{
+    "detail": "JSON parse error - Expecting value: line 2 column 18 (char 20)"
+}
+
+-----------------------------------------------------------------------------------------------------
+
+ERRO AQUI
+Cenário 09 - Criar company com VALOR < zero
+
+Resultado esperado (Não deve ser possível criar uma company id < zero)
+status 400 Bad Request
+body: 
+{
+    "company_id": [
+        "campany id não deve ser menor do que zero"
+    ]
+}
+
+
+-----------------------------------------------------------------------------------------------------
+ERRO AQUI
+Cenário 10 - Criar company com company_id como string inserindo + ("company_id": "+499")
+company_id: 2147483647
+
+Resultado esperado
+status 400 Bad Request
+body: 
+{
+
+    "campany id não deve ser interger"
+}
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 11 - Criar company com company_id maior do que 2147483647
+
+Resultado esperado
+status 400 Bad Request
+body: 
+{
+    "company_id": [
+        "Ensure this value is less than or equal to 2147483647."
+    ]
+}
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 12 - Criar company com company_id menor do que -2147483647
+
+Resultado esperado
+status 400 Bad Request
+body: 
+{
+    "company_id": [
+        "Ensure this value is less than or equal to -2147483647."
+    ]
+}
+
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 13 - Criar company apenas com parâmetro full_service 
+
+Resultado esperado
+status 400 Bad Request
+body: 
+{
+    "company_id": [
+        "This field is required."
+    ]
+}
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 14 - Criar company com parâmetro full_service com valor diferente de true or false
+
+Resultado esperado
+status 400 Bad Request
+body: 
+{
+    "full_service": [
+        "Must be a valid boolean."
+    ]
+}
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 15 - Criar company com parâmetro full_service com valor diferente de true or false e sem company_id
+
+Resultado esperado
+status 400 Bad Request
+
+{
+    "company_id": [
+        "This field is required."
+    ],
+    "full_service": [
+        "Must be a valid boolean."
+    ]
+}
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 16 - Atualizar company com parâmetro full_service com valor diferente de true or false e sem company_id
+
+Resultado esperado
+status 400 Bad Request
+
+{
+    "detail": "JSON parse error - Expecting ',' delimiter: line 3 column 23 (char 29)"
+}
+-----------------------------------------------------------------------------------------------------
+
+
+Cenário 17 - Criar company com parâmetro full_service vazio
+
+Resultado esperado
+status 400 Bad Request
+
+{
+    "detail": "JSON parse error - Expecting value: line 4 column 1 (char 48)"
+}
+-----------------------------------------------------------------------------------------------------
+
+Cenário 18 - Criar company com parâmetro full_service null
+
+Resultado esperado
+status 400 Bad Request
+
+{
+    "full_service": [
+        "This field may not be null."
+    ]
+}
+-----------------------------------------------------------------------------------------------------
+
+Cenário 19 - Criar company com parâmetro full_service não string e não boolean
+
+Resultado esperado
+status 400 Bad Request
+
+{
+    "detail": "JSON parse error - Expecting ',' delimiter: line 3 column 24 (char 55)"
+}
+-----------------------------------------------------------------------------------------------------
+
+Cenário 20 - Criar company com body vazio
+
+Resultado esperado
+status 400 Bad Request
+body: 
+{
+    "company_id": [
+        "This field is required."
+    ],
+    "full_service": [
+        "This field is required."
+    ]
+}
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 21 - Criar company sem passar token
+
+Resultado esperado
+status 403 Forbidden
+body: 
+{
+    "detail": "Authentication credentials were not provided."
+}

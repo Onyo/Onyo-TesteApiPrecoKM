@@ -1,0 +1,40 @@
+Company config - Testes Deletar
+
+Cenário 01 - Deletar company_id existente
+
+Resultado esperado
+status 204 No Content
+
+-------------------------------------------------------------------------------------------------
+
+Cenário 02 - Deletar company_id inexistente
+Resultado esperado
+
+Body
+{
+    "detail": "Not found."
+}
+-------------------------------------------------------------------------------------------------
+
+Cenário 03 - Buscar company_id deletado
+
+Resultado esperado
+status 404 Not Found
+body: 
+
+{
+    "detail": "Not found."
+}
+
+-------------------------------------------------------------------------------------------------
+
+Cenário 04 - Deletar company_id sem passar token
+
+Resultado esperado
+status 403 Forbidden
+body: 
+
+{
+    "detail": "Authentication credentials were not provided."
+}
+

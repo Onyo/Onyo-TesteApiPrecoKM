@@ -1,0 +1,34 @@
+Company config - Testes GET
+
+Cenário 01 - Buscar company_id existente
+
+Resultado esperado
+status 200 OK
+body: 
+
+{
+    "company_id": 155,
+    "full_service": false
+}
+-----------------------------------------------------------------------------------------------------
+
+Cenário 02 - Buscar company_id inexistente
+
+Resultado esperado
+status 404 Not Found
+body: 
+
+{
+    "detail": "Not found."
+}
+
+Cenário 02 - Buscar company_id existente sem passar token
+
+Resultado esperado
+status 403 Forbidden
+body: 
+
+{
+    "detail": "Authentication credentials were not provided."
+}
+

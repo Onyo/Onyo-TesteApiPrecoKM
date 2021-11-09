@@ -1,0 +1,288 @@
+Company config - Testes PUT
+
+Cenário 01 - Atualizar company existente com todos os parâmetros corretos
+
+https://pp-logistic-api-dev.pedepronto.com.br/v2/company-config/155/
+
+Resultado esperado
+status 200 OK
+body: 
+{
+    "company_id":1559999999 ,
+    "full_service": true
+}
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 02 - Atualizar company com company_id inexistente na URL e no body
+
+Resultado esperado
+status 404 Not Found
+body: 
+
+{
+    "detail": "Not found."
+}
+
+-----------------------------------------------------------------------------------------------------
+
+
+Cenário 03 - realizar get no id antigo
+
+Resultado esperado
+status 404 Not Found
+body: 
+
+{
+    "detail": "Not found."
+}
+
+-----------------------------------------------------------------------------------------------------
+
+
+Cenário 04 - Atualizar company com apenas company_id
+
+Resultado esperado
+status 400 Bad Request
+
+{
+    "full_service": [
+        "This field is required."
+    ]
+}
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 05 - Atualizar company com campany_id: null
+
+Resultado esperado
+status 400 Created
+body: 
+{
+    "company_id": [
+        "This field may not be null."
+    ]
+}
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 06 - Atualizar company como texto sem aspas em company_id
+company_id: 
+
+Resultado esperado
+status 200 OK
+body: 
+{
+    "company_id": 487,
+    "full_service": false
+}
+
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 07 - Atualizar company com texto com aspas em company_id
+
+Resultado esperado
+status 200 OK
+body: 
+{
+    "company_id": 487,
+    "full_service": false
+}
+
+
+-----------------------------------------------------------------------------------------------------
+
+ERRO AQUI
+Cenário 08 - Atualizar company com  company_id = zero (0)
+
+Resultado esperado (Não deve ser possível Atualizar uma company id = zero)
+status 400 Bad Request
+body: 
+0
+    "company_id": [
+        "campany id não deve ser igual a zero"
+    ]
+}
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 9 - Atualizar company com company_id vazio
+
+Resultado esperado
+status 400 Bad Request
+body: 
+{{
+    "detail": "JSON parse error - Expecting value: line 2 column 19 (char 21)"
+}
+-----------------------------------------------------------------------------------------------------
+
+ERRO AQUI
+Cenário 10 - Atualizar company com VALOR < zero
+
+Resultado esperado (Não deve ser possível Atualizar uma company id < zero)
+status 400 Bad Request
+body: 
+{
+    "company_id": [
+        "campany id não deve ser menor do que zero"
+    ]
+}
+
+
+-----------------------------------------------------------------------------------------------------
+ERRO AQUI
+Cenário 11 - Atualizar company com company_id como string inserindo "+" ("company_id": "+499")
+company_id: 2147483647
+
+Resultado esperado
+status 400 Bad Request
+body: 
+{
+
+    "campany id deve ser interger"
+}
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 12 - Atualizar company com company_id maior do que 2147483647
+
+Resultado esperado
+status 400 Bad Request
+body: 
+{
+    "company_id": [
+        "Ensure this value is less than or equal to 2147483647."
+    ]
+}
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 13 - Atualizar company com company_id menor do que -2147483647
+
+Resultado esperado
+status 400 Bad Request
+body: 
+{
+    "company_id": [
+        "Ensure this value is less than or equal to -2147483647."
+    ]
+}
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 14 - Atualizar company com company_id existente
+
+Resultado esperado
+status 400 Bad Request
+body: 
+{
+    "company_id": [
+        "custom company config with this company id already exists."
+    ]
+}
+-----------------------------------------------------------------------------------------------------
+
+Cenário 15 - Atualizar company apenas com o parâmetro "full_service"
+
+Resultado esperado
+status 400 Bad Request
+body: 
+{
+    "company_id": [
+        "This field is required."
+    ]
+}
+
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 16 - Atualizar company com parâmetro full_service com valor diferente de true or false
+
+Resultado esperado
+status 400 Bad Request
+body: 
+{
+    "full_service": [
+        "Must be a valid boolean."
+    ]
+}
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 17 - Atualizar company com parâmetro full_service com valor diferente de true or false como string e sem company_id
+
+Resultado esperado
+status 400 Bad Request
+
+{
+    "company_id": [
+        "This field is required."
+    ],
+    "full_service": [
+        "Must be a valid boolean."
+    ]
+}
+
+-----------------------------------------------------------------------------------------------------
+
+Cenário 18 - Atualizar company com parâmetro full_service com valor diferente de true or false e sem company_id
+
+Resultado esperado
+status 400 Bad Request
+
+{
+    "detail": "JSON parse error - Expecting value: line 3 column 21 (char 47)"
+}
+-----------------------------------------------------------------------------------------------------
+
+Cenário 19 - Atualizar company com parâmetro full_service vazio
+
+Resultado esperado
+status 400 Bad Request
+
+{
+    "detail": "JSON parse error - Expecting value: line 5 column 1 (char 46)"
+}
+-----------------------------------------------------------------------------------------------------
+
+Cenário 20 - Atualizar company com parâmetro full_service null
+
+Resultado esperado
+status 400 Bad Request
+
+{
+    "full_service": [
+        "This field may not be null."
+    ]
+}
+-----------------------------------------------------------------------------------------------------
+
+Cenário 21 - Atualizar company com parâmetro full_service não string e não boolean
+
+Resultado esperado
+status 400 Bad Request
+
+{
+    "detail": "JSON parse error - Expecting ',' delimiter: line 3 column 26 (char 47)"
+}
+-----------------------------------------------------------------------------------------------------
+null"
+
+
+Cenário 22 - Atualizar company com body vazio
+
+Resultado esperado
+status 400 Bad Request
+body: 
+{
+    "company_id": [
+        "This field is required."
+    ],
+    "full_service": [
+        "This field is required."
+    ]
+}
+
+-----------------------------------------------------------------------------------------------------
+
