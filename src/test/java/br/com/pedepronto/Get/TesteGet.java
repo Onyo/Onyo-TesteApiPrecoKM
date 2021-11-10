@@ -90,7 +90,7 @@ public class TesteGet {
 		
 		.then()
 		.log().all()
-		.statusCode(200)
+		.statusCode(201)
 
 		;
 
